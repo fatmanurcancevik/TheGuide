@@ -39,28 +39,6 @@ class MainActivity : AppCompatActivity() {
             )
         )
 
-        // Ara butonu
-        binding.searchButton.setOnClickListener {
-            val query = binding.searchInput.text?.toString().orEmpty()
-            if (query.isNotBlank()) search(query)
-        }
-    }
-
-    private fun search(query: String) {
-        binding.searchButton.isEnabled = false
-
-        scope.launch {
-            try {
-                val result = withContext(Dispatchers.IO) {
-                    api.searchCityByName(query)
-                }
-                cityAdapter.submitList(result)
-            } catch (e: Exception) {
-                e.printStackTrace()
-            } finally {
-                binding.searchButton.isEnabled = true
-            }
-        }
     }
 
     override fun onDestroy() {
