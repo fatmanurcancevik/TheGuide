@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.theguide.home.HomeFragment"
+        android:label="Home" />
+
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.theguide.search.SearchFragment"
+        android:label="Search" />
+
+    <fragment
+        android:id="@+id/cityListFragment"
+        android:name="com.example.theguide.citylist.CityListFragment"
+        android:label="List" />
+
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="com.example.theguide.favorites.FavoritesFragment"
+        android:label="Favorites" />
+</navigation>

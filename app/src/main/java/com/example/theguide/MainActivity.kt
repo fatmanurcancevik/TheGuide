@@ -2,47 +2,34 @@ package com.example.theguide
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.setupWithNavController
 import com.example.theguide.databinding.ActivityMainBinding
-import kotlinx.coroutines.*
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-
-    private val bannerAdapter = BannerAdapter()
-    private val cityAdapter = CityAdapter()
-
-    private val api = CityApi(apiKey = BuildConfig.NINJAS_API_KEY)
-    private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Dikey liste (arama sonuçları)
-        binding.contentRecycler.layoutManager = LinearLayoutManager(this)
-        binding.contentRecycler.adapter = cityAdapter
+        val navHost = supportFragmentManager.findFragmentById(R.id.navHost) as NavHostFragment
+        val navController = navHost.navController
 
-        // Yatay bannerlar
-        binding.bannerRecycler.layoutManager= LinearLayoutManager(this)
-        binding.bannerRecycler.adapter = bannerAdapter
+        // Home/Favorites otomatik
+        binding.bottomNav.setupWithNavController(navController)
 
-        bannerAdapter.submitList(
-            listOf(
-                Banner("Capitals", "Center of the countries", imageUrl = "https://i0.wp.com/fsk.org.tr/wp-content/uploads/2024/10/AnitKabir.jpeg?resize=880%2C660&ssl=1"),
-                Banner("Crowd Lovers", "Get lost in the crowd", imageUrl = "https://bunny-wp-pullzone-nfqzsydbnl.b-cdn.net/wp-content/uploads/2023/03/du%CC%88nyanin-en-kalabalik-s%CC%A7ehirleri-tokyo.jpg"),
-                Banner("İzmir", "Yemek & deniz", imageUrl = ""),
-                Banner("Bursa", "Doğa kaçamağı", imageUrl = ""),
-                Banner("Test", "Scroll", imageUrl = "")
-            )
-        )
-
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        scope.cancel()
+        // Back item özel
+        binding.bottomNav.setOnItemSelectedListener { item ->
+            if (item.itemId == R.id.backAction) {
+                onBackPressedDispatcher.onBackPressed()
+                true
+            } else {
+                NavigationUI.onNavDestinationSelected(item, navController)
+            }
+        }
     }
 }
