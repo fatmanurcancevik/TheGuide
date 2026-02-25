@@ -14,9 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TheGuide">
         <activity
-            android:name=".SearchActivity"
-            android:exported="false" />
-        <activity android:name=".CityListActivity" />
+            android:name=".SearchFragment"
+            android:exported="false"
+            tools:ignore="Instantiatable" />
         <activity
             android:name=".MainActivity"
             android:exported="true"

@@ -11,13 +11,13 @@
 
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.example.theguide.search.SearchFragment"
+        android:name="com.example.theguide.SearchFragment"
         android:label="Search" />
 
     <fragment
         android:id="@+id/cityListFragment"
-        android:name="com.example.theguide.citylist.CityListFragment"
-        android:label="List" />
+        android:name="com.example.theguide.CityListFragment"
+        android:label="Cities" />
 
     <fragment
         android:id="@+id/favoritesFragment"

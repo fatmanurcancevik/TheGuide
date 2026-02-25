@@ -14,12 +14,11 @@ import com.example.theguide.databinding.FragmentHomeBinding
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private var _binding: FragmentHomeBinding? = null
-    private val binding get() = _binding!!
-
+    private val binding get() = requireNotNull(_binding)
     private val bannerAdapter = BannerAdapter { banner ->
         val args = Bundle().apply {
-            putString("title", banner.title)
-            putString("queryString", banner.queryString)
+            putString("arg_title", banner.title)
+            putString("arg_query", banner.queryString)
         }
         findNavController().navigate(R.id.cityListFragment, args)
     }
